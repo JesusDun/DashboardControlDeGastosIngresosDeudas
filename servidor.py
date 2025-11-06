@@ -14,10 +14,10 @@ app.secret_key = 'tu_llave_secreta_aqui_puede_ser_cualquier_texto' #
 
 # --- Configuración de Pusher (Canal actualizado) ---
 pusher_client = pusher.Pusher(
-    app_id='2050408',
-    key='b338714caa5dd2af623d',
-    secret='145fd82f4c76138cfdbd',
-    cluster='us2',
+    app_id='2073839',
+    key='59c8528481ff98495844',
+    secret='f1dd25f4e4fa67a5be22',
+    cluster='eu',
     ssl=True
 )
 
