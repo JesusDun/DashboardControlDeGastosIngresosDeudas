@@ -1,0 +1,7 @@
+Flask
+mysql-connector-python
+Flask-Cors
+pusher
+bcrypt
+Flask-Login
+gunicorn
