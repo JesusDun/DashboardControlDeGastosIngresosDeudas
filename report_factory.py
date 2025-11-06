@@ -15,31 +15,28 @@ class Reporte(ABC):
     def get_mimetype(self):
         pass
 
-    @abstractbody
+    # --- ¡CORRECCIÓN AQUÍ! ---
+    @abstractmethod # ANTES: @abstractbody
     def get_filename(self):
         pass
+    # --- FIN DE LA CORRECCIÓN ---
 
 class ReporteCSV(Reporte):
     def generar_reporte(self):
         output = io.StringIO()
         writer = csv.writer(output)
         
-        # --- CAMBIO AQUÍ ---
-        # Añadido 'Metodo_Pago' al encabezado
         writer.writerow(['ID', 'Descripcion', 'Monto', 'Categoria', 'Fecha', 'Metodo_Pago'])
         
         for gasto in self.datos:
-            # --- CAMBIO AQUÍ ---
-            # Añadido gasto['metodo_pago'] a la fila
             writer.writerow([
                 gasto['id'], 
                 gasto['descripcion'], 
                 gasto['monto'], 
                 gasto['categoria'], 
                 gasto['fecha'],
-                gasto.get('metodo_pago', '') # Usamos .get() por seguridad
+                gasto.get('metodo_pago', '') 
             ])
-        # --- FIN DEL CAMBIO ---
         
         return output.getvalue()
 
@@ -47,18 +44,17 @@ class ReporteCSV(Reporte):
         return 'text/csv'
 
     def get_filename(self):
-        return 'gastos_financieros.csv' # Nombre de archivo actualizado
+        return 'gastos_financieros.csv'
 
 class ReporteJSON(Reporte):
     def generar_reporte(self):
-        # El JSON se adapta automáticamente, no necesita cambios
         return json.dumps(self.datos, indent=4) 
 
     def get_mimetype(self):
         return 'application/json'
 
     def get_filename(self):
-        return 'gastos_financieros.json' # Nombre de archivo actualizado
+        return 'gastos_financieros.json'
 
 class ReportFactory:
     def crear_reporte(self, tipo, datos):
